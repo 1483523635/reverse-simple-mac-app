@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		43CE42A72484920900F8E728 /* demo_app_hook.h in Headers */ = {isa = PBXBuildFile; fileRef = 43CE42A52484920900F8E728 /* demo_app_hook.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43CE42AF24849E3100F8E728 /* NSObject+Hook.h in Headers */ = {isa = PBXBuildFile; fileRef = 43CE42AE24849E3100F8E728 /* NSObject+Hook.h */; };
+		43CE42B124849E6900F8E728 /* NSObject+Hook.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CE42B024849E6900F8E728 /* NSObject+Hook.m */; };
+		43CE42B324849F8E00F8E728 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CE42B224849F8E00F8E728 /* main.m */; };
+		43CE42B72484BF4D00F8E728 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43CE42B52484BF4800F8E728 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		43CE42A22484920900F8E728 /* demo_app_hook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = demo_app_hook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CE42A52484920900F8E728 /* demo_app_hook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = demo_app_hook.h; sourceTree = "<group>"; };
 		43CE42A62484920900F8E728 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43CE42AE24849E3100F8E728 /* NSObject+Hook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Hook.h"; sourceTree = "<group>"; };
+		43CE42B024849E6900F8E728 /* NSObject+Hook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Hook.m"; sourceTree = "<group>"; };
+		43CE42B224849F8E00F8E728 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		43CE42B52484BF4800F8E728 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43CE42B72484BF4D00F8E728 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +41,7 @@
 			children = (
 				43CE42A42484920900F8E728 /* demo-app-hook */,
 				43CE42A32484920900F8E728 /* Products */,
+				43CE42B42484BF4800F8E728 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -48,8 +58,19 @@
 			children = (
 				43CE42A52484920900F8E728 /* demo_app_hook.h */,
 				43CE42A62484920900F8E728 /* Info.plist */,
+				43CE42AE24849E3100F8E728 /* NSObject+Hook.h */,
+				43CE42B024849E6900F8E728 /* NSObject+Hook.m */,
+				43CE42B224849F8E00F8E728 /* main.m */,
 			);
 			path = "demo-app-hook";
+			sourceTree = "<group>";
+		};
+		43CE42B42484BF4800F8E728 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43CE42B52484BF4800F8E728 /* Cocoa.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43CE42A72484920900F8E728 /* demo_app_hook.h in Headers */,
+				43CE42AF24849E3100F8E728 /* NSObject+Hook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +96,7 @@
 				43CE429E2484920900F8E728 /* Sources */,
 				43CE429F2484920900F8E728 /* Frameworks */,
 				43CE42A02484920900F8E728 /* Resources */,
+				43CE42AD24849D9E00F8E728 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -126,11 +149,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		43CE42AD24849D9E00F8E728 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\napp_name=\"demo-app-ob-storyboard\"\nframework_name=\"demo_app_hook\"\napp_bundle_path=\"/Applications/${app_name}.app/Contents/MacOS\"\napp_executable_path=\"${app_bundle_path}/${app_name}\"\napp_executable_backup_path=\"${app_executable_path}_backup\"\nframework_path=\"${app_bundle_path}/${framework_name}.framework\"\n# 备份WeChat原始可执行文件\nif [ ! -f \"$app_executable_backup_path\" ] \nthen\n\ncp \"$app_executable_path\" \"$app_executable_backup_path\"\n\nfi\n\nrm -rf \"./Products/${framework_name}.framework\"\ncp -r \"${BUILT_PRODUCTS_DIR}/${framework_name}.framework\" \"./Products/${framework_name}.framework\"\ncp -r \"${BUILT_PRODUCTS_DIR}/${framework_name}.framework\" ${app_bundle_path}\n./insert_dylib --all-yes \"${framework_path}/${framework_name}\" \"$app_executable_backup_path\" \"$app_executable_path\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		43CE429E2484920900F8E728 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43CE42B324849F8E00F8E728 /* main.m in Sources */,
+				43CE42B124849E6900F8E728 /* NSObject+Hook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
