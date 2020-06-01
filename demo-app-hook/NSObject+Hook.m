@@ -44,14 +44,15 @@ void hookMethod(Class originalClass, SEL originalSelector, Class swizzledClass, 
 
 + (void)hook {
 
-//    hookMethod(objc_getClass("ViewController"), @selector(CancelClicked), [self class], @selector(Hook_CancelClicked));
+    hookMethod(objc_getClass("ViewController"), @selector(CancelClicked:), [self class], @selector(Hook_CancelClicked:));
     hookMethod(objc_getClass("AppendText"), @selector(Append:), [self class], @selector(hook_append:));
 
 }
 
-- (NSString *)hook_append:(NSString *)name
-{
+// this is demo for middleware
+- (NSString *)hook_append:(NSString *)name {
     NSLog(@"hook method");
+    return [self hook_append:name];
     return name;
 }
 
