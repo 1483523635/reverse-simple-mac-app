@@ -43,21 +43,29 @@ void hookMethod(Class originalClass, SEL originalSelector, Class swizzledClass, 
 @implementation NSObject (Hook)
 
 + (void)hook {
-
-//    hookMethod(objc_getClass("ViewController"), @selector(CancelClicked), [self class], @selector(Hook_CancelClicked));
-    hookMethod(objc_getClass("AppendText"), @selector(Append:), [self class], @selector(hook_append:));
-
+    hookMethod(objc_getClass("NSView"), @selector(setBackGroundColor:), [self class], @selector(hook_setBackGroundColor:));
 }
 
-- (NSString *)hook_append:(NSString *)name
-{
-    NSLog(@"hook method");
-    return name;
+- (void)hook_setBackGroundColor:(NSColor *)color {
+    [self hook_setBackGroundColor:[self getBackGroundColor]];
 }
 
-- (IBAction)Hook_CancelClicked:(id)sender
-{
-    NSLog(@"hook clicked");
+- (NSColor *)getBackGroundColor {
+    BOOL isDark = [NSObject isDarkMode];
+    if (isDark) {
+        return [NSColor blackColor];
+    }
+    return [NSColor whiteColor];
+}
+
+
++ (BOOL)isDarkMode {
+    NSAppearance *appearance = NSAppearance.currentAppearance;
+    if (@available(*, macOS 10.14)) {
+        return appearance.name == NSAppearanceNameDarkAqua;
+    }
+
+    return NO;
 }
 
 @end
