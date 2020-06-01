@@ -55,8 +55,14 @@ void hookMethod(Class originalClass, SEL originalSelector, Class swizzledClass, 
     return name;
 }
 
-- (IBAction)Hook_CancelClicked:(id)sender
-{
+// this is demo for hook click cancel method;
+- (IBAction)Hook_CancelClicked:(id)sender {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:[NSString stringWithFormat:@"你的软件已经被破坏"]];
+//    [alert setInformativeText:@"Informative text."];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"Ok"];
+    [alert runModal];
     NSLog(@"hook clicked");
 }
 
