@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32CE6E6FD4197D4162CA6335 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 32CE6FE94E3CBCBBE081DF16 /* .gitignore */; };
 		43CE42A72484920900F8E728 /* demo_app_hook.h in Headers */ = {isa = PBXBuildFile; fileRef = 43CE42A52484920900F8E728 /* demo_app_hook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43CE42AF24849E3100F8E728 /* NSObject+Hook.h in Headers */ = {isa = PBXBuildFile; fileRef = 43CE42AE24849E3100F8E728 /* NSObject+Hook.h */; };
 		43CE42B124849E6900F8E728 /* NSObject+Hook.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CE42B024849E6900F8E728 /* NSObject+Hook.m */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32CE6FE94E3CBCBBE081DF16 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		43CE42A22484920900F8E728 /* demo_app_hook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = demo_app_hook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CE42A52484920900F8E728 /* demo_app_hook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = demo_app_hook.h; sourceTree = "<group>"; };
 		43CE42A62484920900F8E728 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 				43CE42A42484920900F8E728 /* demo-app-hook */,
 				43CE42A32484920900F8E728 /* Products */,
 				43CE42B42484BF4800F8E728 /* Frameworks */,
+				32CE6FE94E3CBCBBE081DF16 /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,6 +147,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32CE6E6FD4197D4162CA6335 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
