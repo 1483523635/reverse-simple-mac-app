@@ -44,8 +44,7 @@ void hookMethod(Class originalClass, SEL originalSelector, Class swizzledClass, 
 
 + (void)hook {
 
-//    hookMethod(objc_getClass("ViewController"), @selector(CancelClicked), [self class], @selector(Hook_CancelClicked));
-    hookMethod(objc_getClass("AppendText"), @selector(Append:), [self class], @selector(hook_append:));
+    hookMethod(objc_getClass("ViewController"), @selector(CancelClicked:), [self class], @selector(Hook_CancelClicked:));
 
 }
 
